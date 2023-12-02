@@ -7,8 +7,13 @@ export default [
     icon: { icon: 'tabler-smart-home' },
   },
   {
-    title: 'Second page',
-    to: { name: 'second-page' },
-    icon: { icon: 'tabler-file' },
+    title: 'Livros',
+    to: { name: 'books' },
+    icon: { icon: 'fa-book' },
+  },
+  {
+    title: 'Clima',
+    to: { name: 'climate' },
+    icon: { icon: 'fa-thermometer-full' },
   },
 ] as VerticalNavItems

@@ -2,16 +2,11 @@
   <div>
     <VCard
       class="mb-6"
-      title="Kick start your project 🚀"
+      title="Sobre o projeto 🚀"
     >
       <VCardText>
-        All the best for your new project. Understand where to go from here and how to use our template.
+        Criar uma aplicação web em PHP com acesso restrito, que exiba uma listagem de livros com as opções de ver os detalhes, editar, deletar e criar um livro, e também exiba o clima atual da sua região.
       </VCardText>
-    </VCard>
-
-    <VCard title="Want to integrate JWT? 🔒">
-      <VCardText>We carefully crafted JWT flow so you can implement JWT with ease and with minimum efforts.</VCardText>
-      <VCardText>Please read our  JWT Documentation to get more out of JWT authentication.</VCardText>
     </VCard>
   </div>
 </template>
