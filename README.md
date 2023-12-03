@@ -40,6 +40,9 @@ Descrição
 - Necessária a versão 18.16.0 no NodeJS
 - Necessário o gerenciador de pacote YARN
 
+### .env
+Na raiz do projeto, altere o arquivo .env.example para .env
+
 ### Instale os pacotes
 ```
 yarn install
