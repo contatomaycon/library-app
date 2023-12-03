@@ -7,12 +7,16 @@ export const booksStore = defineStore('booksStore', {
     return {
       dataBook: [] as Book[],
       showModal: false,
+      loading: false,
       isOutlinedSnackbarVisible: false,
       snackbarMessage: '',
       snackbarColor: 'error',
     };
   },
   actions: {
+    setLoading(newVal: boolean) {
+      this.loading = newVal;
+    },
     setShowModal(newVal: boolean) {
       this.showModal = newVal;
     },
@@ -34,26 +38,49 @@ export const booksStore = defineStore('booksStore', {
       return `${day}/${month}/${year}`;
     },
     async listAllBooks() {
-      const list = await axios.get('/book/list');
+      try {
+        this.loading = true;
 
-      if (list) {
-        this.dataBook = list.data.map((book: Book) => ({
-          ...book,
-          created_at: this.formatDate(book.created_at)
-        })) as Book[];
+        const list = await axios.get('/book/list');
+    
+        if (list) {
+          this.dataBook = list.data.map((book: Book) => ({
+            ...book,
+            created_at: this.formatDate(book.created_at)
+          })) as Book[];
+
+          this.loading = false;
+        }
+      } catch (error) {
+        const message = "Erro ao listar livros";
+
+        console.error(message, error);
+
+        this.loading = false;
+        this.showSnackbar(message);
       }
     },
     async listBooks(idBook: number): Promise<Book> {
       try {
+        this.loading = true;
+
         const result = await axios.get(`book/list/${idBook}`);
     
         if (!result || !result.data) {
           return {} as Book;
         }
+
+        this.loading = false;
     
         return result.data as Book;
       } catch (error) {
-        console.error("Erro ao listar livros:", error);
+        const message = "Erro ao listar livro";
+
+        console.error(message, error);
+
+        this.loading = false;
+        this.showSnackbar(message);
+
         return {} as Book;
       }
     },

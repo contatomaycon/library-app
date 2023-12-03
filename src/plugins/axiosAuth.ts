@@ -3,7 +3,7 @@ import { getToken, logout } from "@/auth";
 
 const axiosAuth = axios.create({
   baseURL: import.meta.env.VITE_URL_SERVER,
-  timeout: 5000,
+  timeout: 10000,
 });
 
 axiosAuth.interceptors.request.use((config) => {

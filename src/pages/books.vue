@@ -1,5 +1,18 @@
 <template>
   <VRow>
+    <template v-if="loading">
+      <VOverlay
+        :model-value="loading"
+        class="align-center justify-center overlay-on-top"
+      >
+        <VProgressCircular
+          color="primary"
+          indeterminate
+          size="32"
+        />
+      </VOverlay>
+    </template>
+
     <!-- 👉 Snackbar -->
     <VSnackbar
       v-model="handleIsOutlinedSnackbarVisible"
@@ -158,6 +171,7 @@ export default defineComponent({
     ...mapState(booksStore, [
       "dataBook",
       "showModal",
+      "loading",
       "isOutlinedSnackbarVisible",
       "snackbarMessage",
       "snackbarColor"

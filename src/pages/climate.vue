@@ -1,6 +1,29 @@
 <template>
   <div>
     <VRow>
+      <template v-if="loading">
+        <VOverlay
+          :model-value="loading"
+          class="align-center justify-center overlay-on-top"
+        >
+          <VProgressCircular
+            color="primary"
+            indeterminate
+            size="32"
+          />
+        </VOverlay>
+      </template>
+
+       <!-- 👉 Snackbar -->
+      <VSnackbar
+        v-model="isOutlinedSnackbarVisible"
+        location="top end"
+        variant="flat"
+        :color="snackbarColor"
+      >
+        {{ snackbarMessage }}
+      </VSnackbar>
+
       <VCol cols="6">
         <VCard>
           <VCardText class="d-flex justify-space-between">
@@ -62,6 +85,7 @@ export default defineComponent({
   name: 'WeatherCard',
   data() {
     return {
+      loading: true,
       province: [] as selectWeatherProvince[],
       provinceSelected: 53,
       city: [] as selectWeatherCity[],
@@ -73,40 +97,58 @@ export default defineComponent({
         description: 'Sem estimativa de tempo',
         city: 'Brasília, DF',
         icon: 'mdi-help-circle-outline',
-      } as Weather
+      } as Weather,
+      isOutlinedSnackbarVisible: false,
+      snackbarMessage: '',
+      snackbarColor: 'error',
     };
   },
   methods: {
     async getState(): Promise<selectWeatherProvince[]> {
       try {
+        this.loading = true;
         const result = await axios.get('location/state');
     
         if (!result || !result.data) {
           return [] as selectWeatherProvince[];
         }
+
+        this.loading = false;
     
         return result.data as selectWeatherProvince[];
       } catch (error) {
-        console.error("Erro ao listar estados:", error);
+        this.showSnackbar('Erro ao listar estados');
+
+        this.loading = false;
+
         return [] as selectWeatherProvince[];
       }
     },
     async getCity(idState: number): Promise<selectWeatherCity[]> {
       try {
+        this.loading = true;
+
         const result = await axios.get(`location/state/${idState}`);
     
         if (!result || !result.data) {
           return [] as selectWeatherCity[];
         }
+
+        this.loading = false;
     
         return result.data as selectWeatherCity[];
       } catch (error) {
-        console.error("Erro ao listar cidades:", error);
+        this.showSnackbar('Erro ao listar cidades');
+
+        this.loading = false;
+
         return [] as selectWeatherCity[];
       }
     },
     async getWeatherCity(city: string): Promise<Weather> {
       try {
+        this.loading = true;
+
         const result = await axios.post('weather/city', {
           city
         });
@@ -114,10 +156,15 @@ export default defineComponent({
         if (!result || !result.data) {
           return {} as Weather;
         }
+
+        this.loading = false;
     
         return result.data as Weather;
       } catch (error) {
-        console.error("Erro ao listar cidades:", error);
+        this.showSnackbar('Erro ao listar clima da cidade');
+
+        this.loading = false;
+        
         return {} as Weather;
       }
     },
@@ -136,7 +183,12 @@ export default defineComponent({
 
       this.weatherData = await this.getWeatherCity(this.citySelected);
       this.weatherData.icon = getWeatherIcon(Number(this.weatherData.condition_code));
-    }
+    },
+    showSnackbar(message: string, color: string = 'error') {
+      this.isOutlinedSnackbarVisible = true;
+      this.snackbarMessage = message;
+      this.snackbarColor = color;
+    },
   },
   async mounted() {
     this.province = await this.getState();
