@@ -1,35 +1,51 @@
-# vue
+# Library APP
 
-This template should help get you started developing with Vue 3 in Vite.
+Front-end da API do sistema de Library
 
-## Recommended IDE Setup
+## Informações da Aplicação
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar) (and disable Vetur).
+Para logar basta digitar ou clicar em entrar (Os dados já estão aplicados no formulário):
 
-## Type Support for `.vue` Imports in TS
-
-Since TypeScript cannot handle type information for `.vue` imports, they are shimmed to be a generic Vue component type by default. In most cases this is fine if you don't really care about component prop types outside of templates.
-
-However, if you wish to get actual prop types in `.vue` imports (for example to get props validation when using manual `h(...)` calls), you can run `Volar: Switch TS Plugin on/off` from VSCode command palette.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
+```
+Usuário: admin
+Senha: admin
 ```
 
-### Compile and Hot-Reload for Development
+A página inicial da aplicação exibe uma listagem de todos os livros. Cada livro inclui as seguintes informações:
 
-```sh
-npm run dev
+```
+Título
+Autor
+Gênero
+Editora
+Data de Cadastro
 ```
 
-### Type-Check, Compile and Minify for Production
+- Para visualizar os detalhes de um livro, clique no título do livro.
+- Para editar um livro, clique no botão "Editar".
+- Para excluir um livro, clique no botão "Excluir".
+- Para criar um novo livro, clique no botão "Adicionar".
 
-```sh
-npm run build
+- Exibição do clima atual
+A aplicação também exibe o clima selecionada. Para isso, é utilizado o serviço da API HG Brasil.
+Basta clicar no menu clima, escolher o estado e a cidade.
+
+```
+Temperatura
+Descrição
+```
+
+## Siga os passos:
+
+- Necessária a versão 18.16.0 no NodeJS
+- Necessário o gerenciador de pacote YARN
+
+### Instale os pacotes
+```
+yarn install
+```
+
+### Rode a aplicação
+```
+yarn dev
 ```
