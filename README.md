@@ -53,6 +53,17 @@ yarn install
 yarn dev
 ```
 
+## Tecnologias utilizadas:
+- Vue 3
+- Vite
+- Vuetify
+- TypeScript
+- Lint
+- Pinia
+
+## Template
+- https://pixinvent.com/
+
 ## Print-Screen
 
 ![image](https://github.com/contatomaycon/library-app/assets/50956729/6ca5341b-9ac0-4ba7-ac65-90ce4ff3e83d)

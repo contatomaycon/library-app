@@ -50,6 +50,8 @@ export const booksStore = defineStore('booksStore', {
           })) as Book[];
 
           this.loading = false;
+
+          return this.dataBook;
         }
       } catch (error) {
         const message = "Erro ao listar livros";
